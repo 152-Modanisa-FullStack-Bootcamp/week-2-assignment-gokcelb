@@ -9,7 +9,8 @@
         :src="imgHovered ? video.hoverImage : video.coverImage"
         :alt="video.title"
       />
-      <i class="bi bi-heart-fill favorite"></i>
+      <!-- icon class changes according to isFavorite field -->
+      <i class="bi favorite" :class="{'bi-heart-fill': video.isFavorite, 'bi-heart': !video.isFavorite}"></i>
     </div>
     <div class="video-details">
       <p><strong>{{ video.title }}</strong></p>
@@ -31,7 +32,7 @@
 export default {
   name: "VideoCardFavorites",
   props: {
-    video: Object
+    video: Object,
   },
   data() {
     return {
@@ -42,7 +43,7 @@ export default {
     goToWatchPage() {
       this.$router.push(`/watch/${this.video.id}`)
     }
-  }
+  },
 }
 </script>
 

@@ -1,7 +1,9 @@
 <template>
   <div id="watch">
       <header-component></header-component>
-      <p class="watch-info">Video watch id: <span><strong>{{$route.params.watchid}}</strong></span></p>
+      <p class="watch-info">Video watch id: <span>
+        <strong>{{$route.params.watchid}}</strong>
+      </span></p>
   </div>
 </template>
 

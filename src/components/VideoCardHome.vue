@@ -9,7 +9,8 @@
         :src="imgHovered ? video.hoverImage : video.coverImage"
         :alt="video.title"
       />
-      <i class="bi bi-heart favorite"></i>
+      <!-- icon class changes according to isFavorite field -->
+      <i class="bi favorite" :class="{'bi-heart-fill': video.isFavorite, 'bi-heart': !video.isFavorite}"></i>
     </div>
     <div class="video-details">
       <img class="owner-img" :src="video.ownerImage" :alt="video.ownerName" />

@@ -19,7 +19,7 @@ export default {
     VideoCardHome
   },
   props: {
-      videos: Array
+      videos: Array,
   }
 }
 </script>

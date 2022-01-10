@@ -2,7 +2,7 @@
   <div id="favorites">
     <header-component></header-component>
     <div class="video-container">
-      <video-card-favorites v-for="video in videos" :key="video.id" :video="video">
+      <video-card-favorites v-for="video in favoriteVideos" :key="video.id" :video="video">
       </video-card-favorites>
     </div>
   </div>
@@ -20,6 +20,12 @@ export default {
   },
   props: {
     videos: Array
+  },
+  computed: {
+    // in ordeer to only send favorite videos to VideoCardFavorites component
+    favoriteVideos() {
+      return this.videos.filter(video => video.isFavorite)
+    }
   }
 }
 </script>
