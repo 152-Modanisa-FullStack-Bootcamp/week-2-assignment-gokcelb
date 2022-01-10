@@ -1,12 +1,36 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <router-view :videos="videos"></router-view>
   </div>
 </template>
 
 <script>
+import { getData } from "./api"
+
 export default {
   name: 'App',
+  data() {
+    return {
+      videos: [],
+    };
+  },
+  methods: {
+    async pullData() {
+      this.videos = await getData();
+      console.log(this.videos);
+    },
+  },
+  created() {
+    this.pullData();
+  },
+    watch: {
+    $route: {
+        immediate: true,
+        handler(to) {
+            document.title = to.meta.title || "Assingment 2"
+        }
+    },
+  },
 }
 </script>
 

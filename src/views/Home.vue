@@ -1,56 +1,41 @@
 <template>
   <div id="home">
-    <Header></Header>
+    <header-component></header-component>
     <div class="video-container">
-        <VideoCard 
-            v-for="video in videos" 
-            :key="video.id"
-            :video="video">
-        </VideoCard>
+      <video-card-home v-for="video in videos" :key="video.id" :video="video">
+      </video-card-home>
     </div>
   </div>
 </template>
 
 <script>
-import Header from "@/components/Header"
-import VideoCard from "@/components/VideoCard"
-import { getData } from "@/api.js"
+import HeaderComponent from "@/components/HeaderComponent";
+import VideoCardHome from "@/components/VideoCardHome";
 
 export default {
-    name: "Home",
-    components: {
-        Header,
-        VideoCard
-    },
-    data() {
-        return {
-            videos: []
-        }
-    },
-    methods: {
-        async pullData() {
-            this.videos = await getData()
-            console.log(this.videos);
-        }
-    },
-    created() {
-        this.pullData()
-    }
+  name: "Home",
+  components: {
+    HeaderComponent,
+    VideoCardHome
+  },
+  props: {
+      videos: Array
+  }
 }
 </script>
 
-<style>
+<style scoped>
 #home {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .video-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-top: 30px;
 }
 </style>

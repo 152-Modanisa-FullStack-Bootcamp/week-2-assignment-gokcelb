@@ -9,9 +9,9 @@ Vue.use(VueRouter)
 const router = new VueRouter({
     mode: "history",
     routes: [ 
-        { path: "/", component: Home },
-        { path: "/favorites", component: Favorites },
-        { path: "/watch", component: Watch }
+        { path: "/", component: Home, meta: { title: "Home" } },
+        { path: "/favorites/:userid", component: Favorites, meta: { title: "Favorites" } },
+        { path: "/watch/:watchid", component: Watch, meta: { title: "Watch" } }
     ]
 })
 
