@@ -10,7 +10,10 @@
         :alt="video.title"
       />
       <!-- icon class changes according to isFavorite field -->
-      <i class="bi favorite" :class="{'bi-heart-fill': video.isFavorite, 'bi-heart': !video.isFavorite}"></i>
+      <i 
+        class="bi favorite" 
+        :class="{'bi-heart-fill': video.favorite, 'bi-heart': !video.favorite}">
+      </i>
     </div>
     <div class="video-details">
       <p><strong>{{ video.title }}</strong></p>
@@ -42,7 +45,7 @@ export default {
   methods: {
     goToWatchPage() {
       this.$router.push(`/watch/${this.video.id}`)
-    }
+    },
   },
 }
 </script>

@@ -24,7 +24,7 @@ export default {
   computed: {
     // in ordeer to only send favorite videos to VideoCardFavorites component
     favoriteVideos() {
-      return this.videos.filter(video => video.isFavorite)
+      return this.videos.filter(video => video.favorite)
     }
   }
 }

@@ -1,49 +1,36 @@
 <template>
   <div id="app">
-    <router-view 
-      :videos="manipulatedVideos">
-    </router-view>
+    <router-view :videos="videos"> </router-view>
   </div>
 </template>
 
 <script>
-import { getData } from "./api"
-import { addIsFavoriteField } from "./util"
+import { getData } from "./api";
 
 export default {
-  name: 'App',
+  name: "App",
   data() {
     return {
       videos: [],
-      manipulatedVideos: [],
-      viewThreshold: 100,
     };
   },
   methods: {
     async pullData() {
-      this.videos = await getData()
-      console.log(this.videos)
+      this.videos = await getData();
     },
-    // create isFavorite property and send the manipulated data to children
-    // in order to handle data easier
-    manipulateData() {
-      this.manipulatedVideos = addIsFavoriteField(this.videos, this.viewThreshold)
-      console.log(this.manipulatedVideos)
-    }
   },
   async created() {
-    await this.pullData()
-    this.manipulateData()
+    await this.pullData();
   },
   watch: {
     $route: {
-        immediate: true,
-        handler(to) {
-            document.title = to.meta.title || "Assingment 2"
-        }
+      immediate: true,
+      handler(to) {
+        document.title = to.meta.title || "Assingment 2";
+      },
     },
   },
-}
+};
 </script>
 
 <style>
