@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <router-view :videos="videos"> </router-view>
+    <router-view @toggleFav="handleFavoriteField" :videos="videos">
+    </router-view>
   </div>
 </template>
 
@@ -17,6 +18,14 @@ export default {
   methods: {
     async pullData() {
       this.videos = await getData();
+    },
+    handleFavoriteField(id) {
+      for (let video of this.videos) {
+        if (video.id === id) {
+          video.favorite = video.favorite === null ? true : !video.favorite
+        }
+      }
+      console.log(this.videos);
     },
   },
   async created() {

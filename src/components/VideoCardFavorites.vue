@@ -10,13 +10,20 @@
         :alt="video.title"
       />
       <!-- icon class changes according to isFavorite field -->
-      <i 
-        class="bi favorite" 
-        :class="{'bi-heart-fill': video.favorite, 'bi-heart': !video.favorite}">
+      <i
+        @click="toggleFavorite"
+        class="bi favorite"
+        :class="{
+          'bi-heart-fill': video.favorite,
+          'bi-heart': !video.favorite,
+        }"
+      >
       </i>
     </div>
     <div class="video-details">
-      <p><strong>{{ video.title }}</strong></p>
+      <p>
+        <strong>{{ video.title }}</strong>
+      </p>
       <p>
         <span>{{ video.viewCount }} views</span>,
         <span>Published {{ video.publishDateInMonth }} months ago</span>
@@ -25,7 +32,7 @@
         <img class="owner-img" :src="video.ownerImage" :alt="video.ownerName" />
         <p>{{ video.ownerName }}</p>
       </div>
-      <br>
+      <br />
       <p class="desc">{{ video.description }}</p>
     </div>
   </div>
@@ -44,20 +51,24 @@ export default {
   },
   methods: {
     goToWatchPage() {
-      this.$router.push(`/watch/${this.video.id}`)
+      this.$router.push(`/watch/${this.video.id}`);
+    },
+    // emit toggleFav to destination grandparent
+    toggleFavorite() {
+      this.$emit("toggleFav", this.video.id);
     },
   },
-}
+};
 </script>
 
 <style scoped>
-  #video-card-favorites {
-    width: 900px;
-    display: flex;
-    margin-bottom: 20px;
-  }
+#video-card-favorites {
+  width: 900px;
+  display: flex;
+  margin-bottom: 20px;
+}
 
-  .video-img {
+.video-img {
   width: 360px;
   height: 200px;
   margin-right: 20px;

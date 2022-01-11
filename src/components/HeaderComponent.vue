@@ -8,12 +8,17 @@
 <script>
 export default {
   name: "Header",
+  data() {
+    return {
+      userid: "bootcamp"
+    }
+  },
   methods: {
     goToHomePage() {
       this.$router.push("/")
     },
     goToFavoritesPage() {
-      this.$router.push("/favorites/bootcamp")
+      this.$router.push(`/favorites/${this.userid}`)
     }
   }
 };

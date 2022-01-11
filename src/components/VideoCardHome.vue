@@ -9,8 +9,9 @@
         :src="imgHovered ? video.hoverImage : video.coverImage"
         :alt="video.title"
       />
-      <!-- icon class changes according to isFavorite field -->
+      <!-- icon class changes according to favorite field -->
       <i 
+        @click="toggleFavorite"
         class="bi favorite" 
         :class="{'bi-heart-fill': video.favorite, 'bi-heart': !video.favorite}">
       </i>
@@ -46,6 +47,10 @@ export default {
     goToWatchPage() {
       this.$router.push(`/watch/${this.video.id}`)
     },
+    // emit toggleFav to destination grandparent
+    toggleFavorite() {
+      this.$emit("toggleFav", this.video.id)
+    }
   },
 };
 </script>

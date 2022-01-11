@@ -2,7 +2,13 @@
   <div id="home">
     <header-component></header-component>
     <div class="video-container">
-      <video-card-home v-for="video in videos" :key="video.id" :video="video">
+      <!-- send child's emit back to parent via $listeners -->
+      <video-card-home
+        v-on="$listeners"
+        v-for="video in videos"
+        :key="video.id"
+        :video="video"
+      >
       </video-card-home>
     </div>
   </div>
@@ -16,12 +22,12 @@ export default {
   name: "Home",
   components: {
     HeaderComponent,
-    VideoCardHome
+    VideoCardHome,
   },
   props: {
-      videos: Array,
-  }
-}
+    videos: Array,
+  },
+};
 </script>
 
 <style scoped>

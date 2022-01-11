@@ -2,15 +2,21 @@
   <div id="favorites">
     <header-component></header-component>
     <div class="video-container">
-      <video-card-favorites v-for="video in favoriteVideos" :key="video.id" :video="video">
+      <!-- send child's emit back to parent via $listeners -->
+      <video-card-favorites
+        v-on="$listeners"
+        v-for="video in favoriteVideos"
+        :key="video.id"
+        :video="video"
+      >
       </video-card-favorites>
     </div>
   </div>
 </template>
 
 <script>
-import HeaderComponent from "@/components/HeaderComponent"
-import VideoCardFavorites from '../components/VideoCardFavorites.vue'
+import HeaderComponent from "@/components/HeaderComponent";
+import VideoCardFavorites from "../components/VideoCardFavorites.vue";
 
 export default {
   name: "Favorites",
@@ -19,15 +25,15 @@ export default {
     VideoCardFavorites,
   },
   props: {
-    videos: Array
+    videos: Array,
   },
   computed: {
-    // in ordeer to only send favorite videos to VideoCardFavorites component
+    // in order to only send favorite videos to VideoCardFavorites component
     favoriteVideos() {
-      return this.videos.filter(video => video.favorite)
-    }
-  }
-}
+      return this.videos.filter((video) => video.favorite);
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -43,5 +49,4 @@ export default {
   flex-direction: column;
   margin-top: 30px;
 }
-
 </style>
