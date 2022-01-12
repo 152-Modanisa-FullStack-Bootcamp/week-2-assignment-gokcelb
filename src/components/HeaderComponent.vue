@@ -15,10 +15,12 @@ export default {
   },
   methods: {
     goToHomePage() {
-      this.$router.push("/")
+      const path = "/"
+      if (this.$route.path !== path) this.$router.push(path)
     },
     goToFavoritesPage() {
-      this.$router.push(`/favorites/${this.userid}`)
+      const path = `/favorites/${this.userid}`
+      if (this.$route.path !== path) this.$router.push(path)
     }
   }
 };

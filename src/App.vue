@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <router-view @toggleFav="handleFavoriteField" :videos="videos">
+    <router-view
+      @toggleFav="handleFavoriteField"
+      :videos="videos"
+      :favoriteVideos="favoriteVideos"
+    >
     </router-view>
   </div>
 </template>
@@ -13,6 +17,7 @@ export default {
   data() {
     return {
       videos: [],
+      favoriteVideos: [],
     };
   },
   methods: {
@@ -20,16 +25,22 @@ export default {
       this.videos = await getData();
     },
     handleFavoriteField(id) {
+      console.log("handle favorite field ran");
       for (let video of this.videos) {
         if (video.id === id) {
-          video.favorite = video.favorite === null ? true : !video.favorite
+          video.favorite = !video.favorite;
         }
       }
-      console.log(this.videos);
+      this.filterFavoriteVideos();
+    },
+    filterFavoriteVideos() {
+      console.log("filter favorite ran");
+      this.favoriteVideos = this.videos.filter((video) => video.favorite);
     },
   },
   async created() {
     await this.pullData();
+    this.filterFavoriteVideos();
   },
   watch: {
     $route: {

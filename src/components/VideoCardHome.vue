@@ -10,10 +10,11 @@
         :alt="video.title"
       />
       <!-- icon class changes according to favorite field -->
-      <i 
+      <i
         @click="toggleFavorite"
-        class="bi favorite" 
-        :class="{'bi-heart-fill': video.favorite, 'bi-heart': !video.favorite}">
+        class="bi favorite"
+        :class="{ 'bi-heart-fill': isFavorite, 'bi-heart': !isFavorite }"
+      >
       </i>
     </div>
     <div class="video-details">
@@ -41,16 +42,19 @@ export default {
   data() {
     return {
       imgHovered: false,
+      isFavorite: this.video.favorite,
     };
   },
   methods: {
     goToWatchPage() {
-      this.$router.push(`/watch/${this.video.id}`)
+      this.$router.push(`/watch/${this.video.id}`);
     },
     // emit toggleFav to destination grandparent
     toggleFavorite() {
-      this.$emit("toggleFav", this.video.id)
-    }
+      console.log("toggle favorite ran for HOME");
+      this.isFavorite = !this.isFavorite;
+      this.$emit("toggleFav", this.video.id);
+    },
   },
 };
 </script>

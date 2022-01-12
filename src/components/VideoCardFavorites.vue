@@ -14,8 +14,8 @@
         @click="toggleFavorite"
         class="bi favorite"
         :class="{
-          'bi-heart-fill': video.favorite,
-          'bi-heart': !video.favorite,
+          'bi-heart-fill': isFavorite,
+          'bi-heart': !isFavorite,
         }"
       >
       </i>
@@ -47,6 +47,7 @@ export default {
   data() {
     return {
       imgHovered: false,
+      isFavorite: this.video.favorite,
     };
   },
   methods: {
@@ -55,6 +56,8 @@ export default {
     },
     // emit toggleFav to destination grandparent
     toggleFavorite() {
+      console.log("toggle favorite ran for FAVORITES");
+      this.isFavorite = !this.isFavorite;
       this.$emit("toggleFav", this.video.id);
     },
   },

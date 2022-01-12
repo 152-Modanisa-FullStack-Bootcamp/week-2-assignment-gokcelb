@@ -25,13 +25,7 @@ export default {
     VideoCardFavorites,
   },
   props: {
-    videos: Array,
-  },
-  computed: {
-    // in order to only send favorite videos to VideoCardFavorites component
-    favoriteVideos() {
-      return this.videos.filter((video) => video.favorite);
-    },
+    favoriteVideos: Array,
   },
 };
 </script>
