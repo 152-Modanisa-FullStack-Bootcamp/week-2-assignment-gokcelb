@@ -25,21 +25,22 @@ export default {
       this.videos = await getData();
     },
     handleFavoriteField(id) {
-      console.log("handle favorite field ran");
       for (let video of this.videos) {
         if (video.id === id) {
           video.favorite = !video.favorite;
         }
       }
+      localStorage.setItem("videos", JSON.stringify(this.videos));
       this.filterFavoriteVideos();
     },
     filterFavoriteVideos() {
-      console.log("filter favorite ran");
       this.favoriteVideos = this.videos.filter((video) => video.favorite);
     },
   },
   async created() {
-    await this.pullData();
+    localStorage.getItem("videos")
+      ? (this.videos = JSON.parse(localStorage.getItem("videos")))
+      : await this.pullData();
     this.filterFavoriteVideos();
   },
   watch: {

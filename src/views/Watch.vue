@@ -4,7 +4,7 @@
     <p class="watch-info">
       Video watch id:
       <span>
-        <strong>{{ $route.params.watchid }}</strong>
+        <strong>{{ $route.query.id }}</strong>
       </span>
     </p>
   </div>

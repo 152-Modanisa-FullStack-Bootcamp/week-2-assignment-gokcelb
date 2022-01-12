@@ -52,11 +52,10 @@ export default {
   },
   methods: {
     goToWatchPage() {
-      this.$router.push(`/watch/${this.video.id}`);
+      this.$router.push({ path: "/watch", query: { id: this.video.id } });
     },
     // emit toggleFav to destination grandparent
     toggleFavorite() {
-      console.log("toggle favorite ran for FAVORITES");
       this.isFavorite = !this.isFavorite;
       this.$emit("toggleFav", this.video.id);
     },
