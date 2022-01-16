@@ -2,9 +2,7 @@
   <div id="favorites">
     <header-component></header-component>
     <div class="video-container">
-      <!-- send child's emit back to parent via $listeners -->
       <video-card-favorites
-        v-on="$listeners"
         v-for="video in favoriteVideos"
         :key="video.id"
         :video="video"

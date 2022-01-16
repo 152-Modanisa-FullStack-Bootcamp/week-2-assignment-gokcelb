@@ -42,6 +42,7 @@ export default {
   data() {
     return {
       imgHovered: false,
+      isFavorite: this.video.favorite,
     };
   },
   methods: {
@@ -49,15 +50,12 @@ export default {
       this.$router.push({ path: "/watch", query: { id: this.video.id } });
     },
     toggleFavorite() {
-      this.isFavorite = !this.isFavorite
-      this.$store.dispatch("toggleFavorite", this.video)
-    }
+      this.isFavorite = !this.isFavorite;
+      this.isFavorite
+        ? this.$store.commit("addToFavorites", this.video)
+        : this.$store.commit("removeFromFavorites", this.video);
+    },
   },
-  computed: {
-    isFavorite() {
-      return this.$store.getters.isFavorite(this.video.id)
-    }
-  }
 };
 </script>
 

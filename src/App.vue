@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import { getData } from "@/api";
+
 export default {
   name: "App",
   watch: {
@@ -15,6 +17,9 @@ export default {
       },
     },
   },
+  created: function() {
+    this.$store.dispatch("retrieveVideos", getData)
+  }
 };
 </script>
 

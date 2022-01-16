@@ -9,14 +9,9 @@
         :src="imgHovered ? video.hoverImage : video.coverImage"
         :alt="video.title"
       />
-      <!-- icon class changes according to isFavorite field -->
       <i
-        @click="toggleFavorite"
-        class="bi favorite"
-        :class="{
-          'bi-heart-fill': isFavorite,
-          'bi-heart': !isFavorite,
-        }"
+        @click="remove"
+        class="bi bi-heart-fill favorite"
       >
       </i>
     </div>
@@ -53,16 +48,10 @@ export default {
     goToWatchPage() {
       this.$router.push({ path: "/watch", query: { id: this.video.id } });
     },
-    toggleFavorite() {
-      this.isFavorite = !this.isFavorite
-      this.$store.dispatch("toggleFavorite", this.video)
-    }
+    remove() {
+      this.$store.commit("removeFromFavorites", this.video);
+    },
   },
-  computed: {
-    isFavorite() {
-      return this.$store.getters.isFavorite(this.video.id)
-    }
-  }
 };
 </script>
 

@@ -3,29 +3,40 @@ import Vuex from "vuex"
 
 Vue.use(Vuex)
 
-const store = new Vuex.Store({
-  state: {
-    favoriteVideos: []
+export const state = {
+  videos: [],
+  favoriteVideos: [],
+}
+
+export const mutations = {
+  addToFavorites(state, video) {
+    state.favoriteVideos.push(video)
+    video.favorite = true
   },
-  getters: {
-    isFavorite: state => id => {
-      return state.favoriteVideos.some(video => video.id === id)
-    }
+  removeFromFavorites(state, video) {
+    state.favoriteVideos = state.favoriteVideos.filter(v => v.id !== video.id)
+    video.favorite = false
   },
-  mutations: {
-    addToFavorites(state, payload) {
-      state.favoriteVideos.push(payload)
-    },
-    removeFromFavoritesByID(state, id) {
-      state.favoriteVideos = state.favoriteVideos.filter(video => video.id !== id)
-    }
+  setVideos(state, videos) {
+    state.videos = videos
   },
-  actions: {
-    toggleFavorite({commit, getters}, video) {
-      const isFavorite = getters.isFavorite(video.id)
-      isFavorite ? commit("removeFromFavoritesByID", video.id) : commit("addToFavorites", video)
-    }
+  setFavoriteVideos(state, favVideos) {
+    state.favoriteVideos = favVideos
   }
+}
+
+export const actions = {
+  async retrieveVideos({commit}, retrieveVideosCall) {
+    const videos = await retrieveVideosCall()
+    commit("setVideos", videos)
+    commit("setFavoriteVideos", videos.filter(video => video.favorite))
+  }
+}
+
+export const store = new Vuex.Store({
+  state,
+  mutations,
+  actions
 })
 
 export default store

@@ -15,7 +15,7 @@
 <script>
 import HeaderComponent from "@/components/HeaderComponent";
 import VideoCardHome from "@/components/VideoCardHome";
-import { getData } from "@/api";
+import { mapState } from 'vuex';
 
 export default {
   name: "Home",
@@ -23,13 +23,8 @@ export default {
     HeaderComponent,
     VideoCardHome,
   },
-  data() {
-    return {
-      videos: []
-    }
-  },
-  async created() {
-    this.videos = await getData()
+  computed: {
+    ...mapState(["videos"])
   }
 };
 </script>
