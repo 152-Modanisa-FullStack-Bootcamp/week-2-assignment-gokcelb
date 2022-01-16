@@ -47,19 +47,22 @@ export default {
   data() {
     return {
       imgHovered: false,
-      isFavorite: this.video.favorite,
     };
   },
   methods: {
     goToWatchPage() {
       this.$router.push({ path: "/watch", query: { id: this.video.id } });
     },
-    // emit toggleFav to destination grandparent
     toggleFavorite() {
-      this.isFavorite = !this.isFavorite;
-      this.$emit("toggleFav", this.video.id);
-    },
+      this.isFavorite = !this.isFavorite
+      this.$store.dispatch("toggleFavorite", this.video)
+    }
   },
+  computed: {
+    isFavorite() {
+      return this.$store.getters.isFavorite(this.video.id)
+    }
+  }
 };
 </script>
 

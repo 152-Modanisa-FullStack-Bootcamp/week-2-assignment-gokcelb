@@ -17,6 +17,7 @@
 <script>
 import HeaderComponent from "@/components/HeaderComponent";
 import VideoCardFavorites from "../components/VideoCardFavorites.vue";
+import { mapState } from "vuex";
 
 export default {
   name: "Favorites",
@@ -24,8 +25,8 @@ export default {
     HeaderComponent,
     VideoCardFavorites,
   },
-  props: {
-    favoriteVideos: Array,
+  computed: {
+    ...mapState(["favoriteVideos"]),
   },
 };
 </script>

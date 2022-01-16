@@ -2,9 +2,7 @@
   <div id="home">
     <header-component></header-component>
     <div class="video-container">
-      <!-- send child's emit back to parent via $listeners -->
       <video-card-home
-        v-on="$listeners"
         v-for="video in videos"
         :key="video.id"
         :video="video"
@@ -17,6 +15,7 @@
 <script>
 import HeaderComponent from "@/components/HeaderComponent";
 import VideoCardHome from "@/components/VideoCardHome";
+import { getData } from "@/api";
 
 export default {
   name: "Home",
@@ -24,9 +23,14 @@ export default {
     HeaderComponent,
     VideoCardHome,
   },
-  props: {
-    videos: Array,
+  data() {
+    return {
+      videos: []
+    }
   },
+  async created() {
+    this.videos = await getData()
+  }
 };
 </script>
 

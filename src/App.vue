@@ -1,48 +1,12 @@
 <template>
   <div id="app">
-    <router-view
-      @toggleFav="handleFavoriteField"
-      :videos="videos"
-      :favoriteVideos="favoriteVideos"
-    >
-    </router-view>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import { getData } from "./api";
-
 export default {
   name: "App",
-  data() {
-    return {
-      videos: [],
-      favoriteVideos: [],
-    };
-  },
-  methods: {
-    async pullData() {
-      this.videos = await getData();
-    },
-    handleFavoriteField(id) {
-      for (let video of this.videos) {
-        if (video.id === id) {
-          video.favorite = !video.favorite;
-        }
-      }
-      localStorage.setItem("videos", JSON.stringify(this.videos));
-      this.filterFavoriteVideos();
-    },
-    filterFavoriteVideos() {
-      this.favoriteVideos = this.videos.filter((video) => video.favorite);
-    },
-  },
-  async created() {
-    localStorage.getItem("videos")
-      ? (this.videos = JSON.parse(localStorage.getItem("videos")))
-      : await this.pullData();
-    this.filterFavoriteVideos();
-  },
   watch: {
     $route: {
       immediate: true,
